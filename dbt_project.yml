@@ -36,5 +36,8 @@ models:
     # Applies to all files under models/staging/
     staging:
       materialized: table
-
-      ## this is a test. AGAIN
+    prep:
+      materialized: table
+    mart:
+      materialized: table
+    
