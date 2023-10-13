@@ -1,15 +1,25 @@
-WITH weekly_avg AS (
-    SELECT
-        city,
-        date_trunc('week', date) AS week_start,
-        AVG(avgtemp_c) AS avg_temp_weekly
-    FROM {{ ref('prep_temp') }}
-    GROUP BY city, date_trunc('week', date)
-)
+-- with weekday_avg as (
+--     select 
+--         avg_temp,
+--         avg(gbp) as avg_gbp,
+--         avg(usd) as avg_usd,
+--         avg(inr) as avg_inr
+--     from {{ref('prep_temp')}}
+--     group by base_currency
+-- )
 
-SELECT 
-    city,
-    week_start,
-    avg_temp_weekly
-FROM weekly_avg
-ORDER BY city, week_start;
+-- select *
+-- from weekday_avg
+
+with prep_temp_data as (
+    SELECT * 
+    FROM {{ref('prep_temp')}}
+),
+weekday_avg as(
+    SELECT avg(avgtemp_c) AS, weekday
+    from prep_temp_data
+    WHERE weekday is not null
+    GROUP BY weekday
+)
+select *
+FROM weekday_avg
