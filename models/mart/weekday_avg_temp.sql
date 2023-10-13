@@ -16,7 +16,7 @@ with prep_temp_data as (
     FROM {{ref('prep_temp')}}
 ),
 weekday_avg as(
-    SELECT avg(avgtemp_c) AS, weekday
+    SELECT avg(avgtemp_c) AS weekday_avg, weekday
     from prep_temp_data
     WHERE weekday is not null
     GROUP BY weekday
