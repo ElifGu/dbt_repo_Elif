@@ -11,3 +11,5 @@ add_weekday AS (
 SELECT *
 FROM add_weekday
 
+
+
