@@ -4,12 +4,13 @@ WITH temp_daily AS (
 ),
 add_weekday AS (
     SELECT *,
-        date_part AS weekday,
-        date_part AS day_num
+        date_part ('weekday', date)AS weekday,
+        date_part('day', date) AS day_num
     FROM temp_daily
 )
 SELECT *
 FROM add_weekday
+
 
 
 
