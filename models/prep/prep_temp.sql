@@ -18,7 +18,7 @@ WITH temp_daily AS (
 ),
 add_weekday AS (
     SELECT *,
-        date_part('dow', date) AS weekday,
+        trim(to_char(date, 'Day')) AS weekday,
         date_part('day', date) AS day_num
     FROM temp_daily
 )
