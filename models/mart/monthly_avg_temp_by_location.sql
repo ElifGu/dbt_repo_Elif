@@ -10,7 +10,7 @@ monthly_avg as(
     from prep_temp_data
     WHERE date is not null
     GROUP BY month, city
-    ORDER BY month, avg_temp;
+    ORDER BY month, avg_temp
 )
 select *
-FROM monthly_avg
+FROM monthly_avg;
