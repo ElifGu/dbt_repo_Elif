@@ -13,4 +13,4 @@ monthly_avg as(
     ORDER BY month, avg_temp
 )
 select *
-FROM monthly_avg;
+FROM monthly_avg
