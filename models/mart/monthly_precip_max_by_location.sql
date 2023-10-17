@@ -5,7 +5,8 @@ with prep_temp_data as (
 max_precip as(
     SELECT date_part('month', date) AS month,
     max(totalprecip_mm) AS max_precip_mm,
-    city
+    city,
+    country
     from prep_temp_data
     WHERE date is not null
     GROUP BY city, month

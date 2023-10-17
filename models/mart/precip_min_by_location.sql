@@ -5,7 +5,8 @@ with prep_temp_data as (
 min_precip as(
     SELECT date_part('month', date) AS month,
     min(totalprecip_mm) AS min_precip_mm,
-    city
+    city,
+    country
     from prep_temp_data
     WHERE date is not null
     GROUP BY city, month

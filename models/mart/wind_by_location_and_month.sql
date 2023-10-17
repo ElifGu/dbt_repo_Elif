@@ -5,7 +5,8 @@ with prep_temp_data as (
 windy_locations as(
     SELECT date_part('month', date) AS month,
     max(maxwind_kph) AS max_wind,
-    city
+    city,
+    country
     from prep_temp_data
     WHERE date is not null
     GROUP BY city, month
