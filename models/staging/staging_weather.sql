@@ -1,5 +1,6 @@
 WITH temperature_daily AS (
-    SELECT ((extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'date')::VARCHAR)::date  AS date,
+    SELECT 
+        ((extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'date')::VARCHAR)::date  AS date,
         ((extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'day' -> 'maxtemp_c')::VARCHAR)::FLOAT AS maxtemp_c,
         ((extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'day' -> 'mintemp_c')::VARCHAR)::FLOAT AS mintemp_c,
         ((extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'day' -> 'avgtemp_c')::VARCHAR)::FLOAT AS avgtemp_c,
@@ -9,8 +10,22 @@ WITH temperature_daily AS (
         (extracted_data -> 'location' -> 'region')::VARCHAR  AS region,
         (extracted_data -> 'location' -> 'country')::VARCHAR  AS country,
         ((extracted_data -> 'location' -> 'lat')::VARCHAR)::NUMERIC  AS lat, 
-        ((extracted_data -> 'location' -> 'lon')::VARCHAR)::NUMERIC  AS lon
+        ((extracted_data -> 'location' -> 'lon')::VARCHAR)::NUMERIC  AS lon,
+         (extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'day' -> 'condition'-> 'text')::VARCHAR  AS cond
     FROM {{source("staging", "raw_temp")}})
-SELECT * 
+SELECT 
+    date,
+    maxtemp_c,
+    mintemp_c,
+    avgtemp_c,
+    maxwind_kph,
+    totalprecip_mm,
+    REPLACE (city, '"', '') as city,
+    REPLACE (country, '"', '') as country,
+    lat, 
+    lon,
+    REPLACE (cond, '"', '') as cond
+
 FROM temperature_daily
+
 
