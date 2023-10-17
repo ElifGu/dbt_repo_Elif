@@ -9,7 +9,7 @@ monthly_min as(
     country
     from prep_temp_data
     WHERE date is not null
-    GROUP BY month, city
+    GROUP BY month, city, country
     ORDER BY month, max_temp
 )
 select *

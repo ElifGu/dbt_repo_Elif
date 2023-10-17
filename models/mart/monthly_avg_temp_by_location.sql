@@ -10,7 +10,7 @@ monthly_avg as(
     country
     from prep_temp_data
     WHERE date is not null
-    GROUP BY month, city
+    GROUP BY month, city, country
     ORDER BY month, avg_temp
 )
 select *

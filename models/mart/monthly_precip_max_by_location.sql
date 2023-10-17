@@ -9,7 +9,7 @@ max_precip as(
     country
     from prep_temp_data
     WHERE date is not null
-    GROUP BY city, month
+    GROUP BY city, country, month
     ORDER BY city, month
 )
 select *
