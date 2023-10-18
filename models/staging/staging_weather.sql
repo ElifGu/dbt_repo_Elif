@@ -8,7 +8,7 @@ WITH temperature_daily AS (
         ((extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'day' -> 'totalprecip_mm')::VARCHAR)::FLOAT AS totalprecip_mm,
         (extracted_data -> 'location' -> 'name')::VARCHAR  AS city,
         (extracted_data -> 'location' -> 'region')::VARCHAR  AS region,
-        (extracted_data -> 'location' -> 'country')::VARCHAR  AS country,
+         (extracted_data -> 'location' -> 'country')::VARCHAR  AS original_country,
         ((extracted_data -> 'location' -> 'lat')::VARCHAR)::NUMERIC  AS lat, 
         ((extracted_data -> 'location' -> 'lon')::VARCHAR)::NUMERIC  AS lon,
          (extracted_data -> 'forecast' -> 'forecastday' -> 0 -> 'day' -> 'condition'-> 'text')::VARCHAR  AS cond
@@ -21,11 +21,10 @@ SELECT
     maxwind_kph,
     totalprecip_mm,
     REPLACE (city, '"', '') as city,
-    REPLACE (country, '"', '') as country,
     CASE 
-        WHEN REPLACE (country, '"', '') = 'Russia' THEN 'Russian Federation'
-        WHEN REPLACE (country, '"', '') = 'Congo' THEN 'Congo, Democratic Republic of the'
-        ELSE REPLACE (country, '"', '')
+        WHEN REPLACE (original_country, '"', '') = 'Russia' THEN 'Russian Federation'
+        WHEN REPLACE (original_country, '"', '') = 'Congo' THEN 'Congo, Democratic Republic of the'
+        ELSE REPLACE (original_country, '"', '')
     END as country,
     lat, 
     lon,
