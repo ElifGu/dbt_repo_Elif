@@ -22,6 +22,11 @@ SELECT
     totalprecip_mm,
     REPLACE (city, '"', '') as city,
     REPLACE (country, '"', '') as country,
+    CASE 
+        WHEN REPLACE (country, '"', '') = 'Russia' THEN 'Russian Federation'
+        WHEN REPLACE (country, '"', '') = 'Congo' THEN 'Congo, Democratic Republic of the'
+        ELSE REPLACE (country, '"', '')
+    END as country,
     lat, 
     lon,
     REPLACE (cond, '"', '') as cond
