@@ -23,7 +23,7 @@ SELECT
     REPLACE (city, '"', '') as city,
     CASE 
         WHEN REPLACE (original_country, '"', '') = 'Russia' THEN 'Russian Federation'
-        WHEN REPLACE (original_country, '"', '') = 'Congo' THEN 'Congo, Democratic Republic of the'
+        WHEN REPLACE (original_country, '"', '') = 'Democratic Republic of Congo' THEN 'Congo, Democratic Republic of the'
         ELSE REPLACE (original_country, '"', '')
     END as country,
     lat, 
