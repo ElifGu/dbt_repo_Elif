@@ -2,9 +2,9 @@ with prep_temp_data as (
     SELECT * 
     FROM {{ref('prep_temp')}}
 ),
-min_precip as(
+avg_precip as(
     SELECT date_part('month', date) AS month,
-    min(totalprecip_mm) AS min_precip_mm,
+    avg(totalprecip_mm) AS avg_precip_mm,
     city,
     country,
     lat,
@@ -15,4 +15,4 @@ min_precip as(
     ORDER BY city, month
 )
 select *
-FROM min_precip
+FROM avg_precip
