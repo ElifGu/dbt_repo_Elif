@@ -6,10 +6,12 @@ windy_locations as(
     SELECT date_part('month', date) AS month,
     max(maxwind_kph) AS max_wind,
     city,
-    country
+    country,
+    lat,
+    lon
     from prep_temp_data
     WHERE date is not null
-    GROUP BY city, country, month
+    GROUP BY city, country, month, lat, lon
     ORDER BY city, month
 )
 select *
