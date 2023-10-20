@@ -11,7 +11,7 @@ monthly_max as(
     lon
     from prep_temp_data
     WHERE date is not null
-    GROUP BY month, city, country
+    GROUP BY month, city, country, lat, lon
     ORDER BY month, max_temp
 )
 select *
